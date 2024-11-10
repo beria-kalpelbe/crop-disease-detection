@@ -8,7 +8,7 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 
 class DatasetInitializer():
-    def __init__(self, data_path:str='./data'):
+    def __init__(self, data_path:str='data'):
         self.DATA_DIR = data_path
         self._download_data()
         self._unzip_images()
@@ -17,10 +17,10 @@ class DatasetInitializer():
         self.X_train, self.X_val = self._get_train_val_slpit()
         
     def _download_data(self):
-        gdown.download("https://drive.google.com/file/d/1rY8pjQ27h9petBcZP0RxkYHoyu8RvToq", output="images.zip", quiet=False)
-        gdown.download("https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw", output="Train.csv", quiet=False)
-        gdown.download("https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO", output="Test.csv", quiet=False)
-        gdown.download("https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F", output="SampleSubmission.csv", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1rY8pjQ27h9petBcZP0RxkYHoyu8RvToq", output=f"{self.DATA_DIR}/images.zip", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw", output=f"{self.DATA_DIR}/Train.csv", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO", output=f"{self.DATA_DIR}/Test.csv", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F", output=f"{self.DATA_DIR}/SampleSubmission.csv", quiet=False)
     
     def _unzip_images(self):
         shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')
