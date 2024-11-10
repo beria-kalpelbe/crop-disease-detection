@@ -23,7 +23,7 @@ class DatasetInitializer():
         gdown.download(id="1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F", output="SampleSubmission.csv", quiet=False)
     
     def _unzip_images(self):
-        shutil.unpack_archive(self.DATA_DIR / 'images.zip', 'images')
+        shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')
         
     def _read_csv_files(self):
         train = pd.read_csv(self.DATA_DIR / 'Train.csv')
