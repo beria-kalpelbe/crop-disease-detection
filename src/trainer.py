@@ -3,7 +3,7 @@ import torch
 import time
 from datetime import timedelta
 from wandb import AlertLevel
-
+import wandb
 class EarlyStopping:
     def __init__(self, patience=5, min_delta=0):
         """
