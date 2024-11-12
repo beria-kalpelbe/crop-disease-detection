@@ -45,8 +45,8 @@ class DatasetInitializer():
         
     def _read_csv_files(self):
         train = pd.read_csv(self.DATA_DIR+'/Train.csv')
-        test = pd.read_csv(self.DATA_DIR+'/Test.csv')
-        ss = pd.read_csv(self.DATA_DIR+'/SampleSubmission.csv')
+        test = pd.read_csv(self.DATA_DIR'Test.csv')
+        ss = pd.read_csv(self.DATA_DIR / 'SampleSubmission.csv')
         # Add an image_path column
         train['image_path'] = [Path('images/' + x) for x in train.Image_ID]
         test['image_path'] = [Path('images/' + x) for x in test.Image_ID]

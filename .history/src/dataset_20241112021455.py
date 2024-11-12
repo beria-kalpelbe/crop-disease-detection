@@ -37,16 +37,16 @@ class DatasetInitializer():
             "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
         }
         for filename, url in urls.items():
+            print("Unzipping images")
             self._download_file_from_drive(url, filename)
     
     def _unzip_images(self):
-        print("Unzipping images.....")
         shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')
         
     def _read_csv_files(self):
-        train = pd.read_csv(self.DATA_DIR+'/Train.csv')
-        test = pd.read_csv(self.DATA_DIR+'/Test.csv')
-        ss = pd.read_csv(self.DATA_DIR+'/SampleSubmission.csv')
+        train = pd.read_csv(self.DATA_DIR / 'Train.csv')
+        test = pd.read_csv(self.DATA_DIR / 'Test.csv')
+        ss = pd.read_csv(self.DATA_DIR / 'SampleSubmission.csv')
         # Add an image_path column
         train['image_path'] = [Path('images/' + x) for x in train.Image_ID]
         test['image_path'] = [Path('images/' + x) for x in test.Image_ID]
