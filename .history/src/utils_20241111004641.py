@@ -27,13 +27,6 @@ def display_image_with_bboxes(image: np.ndarray, bboxes: np.ndarray, image_name,
     plt.show()
     
 def plot_losses(train_losses, val_losses, path_folder:str='./docs'):
-    """
-    Plot the training and validation losses
-    Args:
-        train_losses (list): The training losses.
-        val_losses (list): The validation losses.
-        path_folder (str, optional): The path to save the image. Defaults to './docs'.
-    """
     plt.figure(figsize=(15, 6))
     plt.plot(train_losses, label='Train Loss')
     plt.plot(val_losses, label='Validation Loss')

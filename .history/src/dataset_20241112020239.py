@@ -36,6 +36,7 @@ class DatasetInitializer():
             "Test.csv": "https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO",
             "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
         }
+        pat = re.compile('https://drive.google.com/file/d/(.*)') 
         for filename, url in zip(urls.keys, urls.values):
             self._download_file_from_drive(url, filename)
     

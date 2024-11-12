@@ -6,8 +6,6 @@ import shutil
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
-import re
-import os
 
 class DatasetInitializer():
     def __init__(self, data_path:str='data'):
@@ -18,26 +16,22 @@ class DatasetInitializer():
         self.id_class_match = self._get_id_classes_correspondances()
         self.X_train, self.X_val = self._get_train_val_slpit()
         
-    def _download_file_from_drive(self, url, filename):
-        pat = re.compile('https://drive.google.com/file/d/(.*)') 
-        g = re.match(pat,url)
-        if g:
-            id = g.group(1)
-            down_url = f'https://drive.google.com/uc?id={id}'
-            os.system(f'gdown {down_url} -O {os.path.join(self.DATA_DIR, filename)}')
-            os.system(f'gdown {down_url}')
-        else:
-            print(f"Warning: Could not extract ID from URL: {url}")
-        
     def _download_data(self):
-        urls = {
-            "images.zip": "https://drive.google.com/file/d/1rY8pjQ27h9petBcZP0RxkYHoyu8RvToq",
-            "Train.csv": "https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw",
-            "Test.csv": "https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO",
-            "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
-        }
-        for filename, url in zip(urls.keys, urls.values):
-            self._download_file_from_drive(url, filename)
+        
+        pat = re.compile('https://drive.google.com/file/d/(.*)') 
+        for url in url_list:
+            g = re.match(pat,url)
+            if g:
+                id = g.group(1)
+                down_url = f'https://drive.google.com/uc?id={id}'
+                os.system(f'gdown {down_url}')
+            else:
+                print(f"Warning: Could not extract ID from URL: {url}")
+        
+        gdown.download("https://drive.google.com/file/d/1rY8pjQ27h9petBcZP0RxkYHoyu8RvToq", output=f"{self.DATA_DIR}/images.zip", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw", output=f"{self.DATA_DIR}/Train.csv", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO", output=f"{self.DATA_DIR}/Test.csv", quiet=False)
+        gdown.download("https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F", output=f"{self.DATA_DIR}/SampleSubmission.csv", quiet=False)
     
     def _unzip_images(self):
         shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')

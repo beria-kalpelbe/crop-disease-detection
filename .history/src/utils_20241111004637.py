@@ -3,6 +3,7 @@ import matplotlib.patches as patches
 import numpy as np
 
 def display_image_with_bboxes(image: np.ndarray, bboxes: np.ndarray, image_name, path_folder:str='./docs'):
+
     """
     Display the image with bounding boxes
     Args:
@@ -11,6 +12,7 @@ def display_image_with_bboxes(image: np.ndarray, bboxes: np.ndarray, image_name,
         image_name (str): The name of the image.
         path_folder (str): The path to save the image.
     """
+    
     height, width, _ = image.shape
     fig, ax = plt.subplots(1, figsize=(10, 6))
     ax.imshow(image)
@@ -27,13 +29,6 @@ def display_image_with_bboxes(image: np.ndarray, bboxes: np.ndarray, image_name,
     plt.show()
     
 def plot_losses(train_losses, val_losses, path_folder:str='./docs'):
-    """
-    Plot the training and validation losses
-    Args:
-        train_losses (list): The training losses.
-        val_losses (list): The validation losses.
-        path_folder (str, optional): The path to save the image. Defaults to './docs'.
-    """
     plt.figure(figsize=(15, 6))
     plt.plot(train_losses, label='Train Loss')
     plt.plot(val_losses, label='Validation Loss')

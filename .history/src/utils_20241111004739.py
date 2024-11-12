@@ -32,7 +32,7 @@ def plot_losses(train_losses, val_losses, path_folder:str='./docs'):
     Args:
         train_losses (list): The training losses.
         val_losses (list): The validation losses.
-        path_folder (str, optional): The path to save the image. Defaults to './docs'.
+        path_folder (str, optional): 
     """
     plt.figure(figsize=(15, 6))
     plt.plot(train_losses, label='Train Loss')

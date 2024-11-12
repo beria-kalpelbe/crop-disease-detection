@@ -30,14 +30,20 @@ class DatasetInitializer():
             print(f"Warning: Could not extract ID from URL: {url}")
         
     def _download_data(self):
-        urls = {
+        url_list = {
             "images.zip": "https://drive.google.com/file/d/1rY8pjQ27h9petBcZP0RxkYHoyu8RvToq",
-            "Train.csv": "https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw",
-            "Test.csv": "https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO",
-            "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
+            Train.csv"https://drive.google.com/file/d/1iToVuuZd48c-I232GWk0FEIzeUgEPRMw",
+            "https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO",
+            "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
         }
-        for filename, url in zip(urls.keys, urls.values):
-            self._download_file_from_drive(url, filename)
+        pat = re.compile('https://drive.google.com/file/d/(.*)') 
+        for i, url in enumerate(url_list):
+            self._download_file_from_drive(url, filenames[i])
+        
+        gdown.download(, output=f"{self.DATA_DIR}/images.zip", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/Train.csv", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/Test.csv", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/SampleSubmission.csv", quiet=False)
     
     def _unzip_images(self):
         shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')

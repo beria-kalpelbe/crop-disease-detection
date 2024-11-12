@@ -36,8 +36,14 @@ class DatasetInitializer():
             "Test.csv": "https://drive.google.com/file/d/1oJO8xR_i_FSkyePLsJ-Cd_1EaKn5OJxO",
             "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
         }
+        pat = re.compile('https://drive.google.com/file/d/(.*)') 
         for filename, url in zip(urls.keys, urls.values):
             self._download_file_from_drive(url, filename)
+        
+        gdown.download(, output=f"{self.DATA_DIR}/images.zip", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/Train.csv", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/Test.csv", quiet=False)
+        gdown.download(, output=f"{self.DATA_DIR}/SampleSubmission.csv", quiet=False)
     
     def _unzip_images(self):
         shutil.unpack_archive(self.DATA_DIR+'/images.zip', 'images')
