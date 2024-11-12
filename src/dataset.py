@@ -37,7 +37,10 @@ class DatasetInitializer():
             "SampleSubmission.csv": "https://drive.google.com/file/d/1Z3JX-5946GKskwwaOpU-KUw7lcR9EY7F"
         }
         for filename, url in urls.items():
-            self._download_file_from_drive(url, filename)
+            if os.path.exists(os.path.join(self.DATA_DIR, filename)):
+                print(f"File {filename} detected, skipping downloading")
+            else:
+                self._download_file_from_drive(url, filename)
     
     def _unzip_images(self):
         print("Unzipping images.....")
