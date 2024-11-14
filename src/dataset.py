@@ -1,13 +1,13 @@
 import cv2
 import torch
 from torch.utils.data import Dataset
-import gdown
 import shutil
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 import re
 import os
+import gdown
 
 class DatasetInitializer():
     def __init__(self, data_path:str='data'):
@@ -25,7 +25,6 @@ class DatasetInitializer():
             id = g.group(1)
             down_url = f'https://drive.google.com/uc?id={id}'
             os.system(f'gdown {down_url} -O {os.path.join(self.DATA_DIR, filename)}')
-            os.system(f'gdown {down_url}')
         else:
             print(f"Warning: Could not extract ID from URL: {url}")
         
@@ -40,6 +39,7 @@ class DatasetInitializer():
             if os.path.exists(os.path.join(self.DATA_DIR, filename)):
                 print(f"File {filename} detected, skipping downloading")
             else:
+                print(f'Downloading {filename}')
                 self._download_file_from_drive(url, filename)
     
     def _unzip_images(self):

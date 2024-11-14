@@ -1,3 +1,5 @@
 .history/
 .notebook/
 venv/
+data/images/
+data/images.zip
